@@ -1,4 +1,5 @@
 const User = require('../resources/users/user.model');
+const Board = require('../resources/boards/board.model');
 
 const DB = {
   Users: [],
@@ -7,39 +8,40 @@ const DB = {
 };
 
 DB.Users.push(new User(), new User());
+DB.Boards.push(new Board());
 
-const getAllUsers = async () =>
-  JSON.parse(JSON.stringify(DB.Users))
+const getAll = async (table) =>
+  JSON.parse(JSON.stringify(DB[table]))
 ;
 
-const getUser = async (id) => DB.Users.filter((user) => user.id === id)[0];
+const getById = async (table, id) => DB[table].filter((user) => user.id === id)[0];
 
-const addUser = async (user) => {
-  DB.Users.push(user);
-  const newUser = await getUser(user.id);
-  return newUser;
+const create = async (table, item) => {
+  DB[table].push(item);
+  const newItem = await getById(table, item.id);
+  return newItem;
 };
 
-const updateUser = async (id, {name, login, password}) => {
-  const user = await getUser(id);
-  if (!user) {
-    throw new Error(`The user with id ${id} is not exist.`);
-  }
-  user.name = name;
-  user.login = login;
-  user.password = password;
-
-  return user;
-}
-
-const removeUser = async (id) => {
-  const index = await DB.Users.findIndex((user) => user.id === id);
+const update = async (table, id, updatedItem) => {
+  const index = await DB[table].findIndex((item) => item.id === id);
   if (index === -1) {
-    throw new Error(`The user with id ${id} is not exist.`);
+    throw new Error(`The entity with id ${id} is not exist.`);
   }
-  const removedUser = DB.Users.splice(index, 1);
+  const oldItem = DB[table][index];
+  const newItem = {...oldItem, ...updatedItem};
+  DB[table].splice(index, 1, newItem);
 
-  return removedUser;
+  return updatedItem;
 }
 
-module.exports = {getAllUsers, getUser, addUser, updateUser, removeUser};
+const remove = async (table, id) => {
+  const index = await DB[table].findIndex((item) => item.id === id);
+  if (index === -1) {
+    throw new Error(`The entity with id ${id} is not exist.`);
+  }
+  const removedItem = DB[table].splice(index, 1);
+
+  return removedItem;
+}
+
+module.exports = {getAll, getById, create, update, remove};
