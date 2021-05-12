@@ -17,6 +17,11 @@ const setNew = async ({name, login, password}) => {
   return DB.addUser(user);
 };
 
-module.exports = { getAll, getById, setNew };
+
+const update = async (id, updatedUser) => DB.updateUser(id, updatedUser);
+
+const remove = async (id) => DB.removeUser(id);
+
+module.exports = { getAll, getById, setNew, update, remove };
 
 
