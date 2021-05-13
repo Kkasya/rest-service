@@ -1,8 +1,7 @@
-const {v4: uuid} = require('uuid');
+let initialId = 0;
 
 class Task {
   constructor({
-                id = uuid(),
                 title = 'First',
                 order = 0,
                 description = 'Description',
@@ -10,13 +9,18 @@ class Task {
                 boardId = null,
                 columnId = null
               } = {}) {
-    this.id = id;
+    this.id = Task.getId();;
     this.title = title;
     this.order = order;
     this.description = description;
     this.userId = userId;
     this.boardId = boardId;
     this.columnId = columnId;
+  }
+
+  static getId() {
+    initialId += 1;
+    return initialId.toString();
   }
 }
 

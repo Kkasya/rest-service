@@ -10,10 +10,11 @@ const DB = {
 DB.Users.push(new User(), new User());
 DB.Boards.push(new Board());
 
+const getSize = async (table) => DB[table].length;
+
 const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
 
 const getById = async (table, id, boardId) => {
-  // if (boardId)
   const data = boardId ?
     DB[table].filter((item) => item.boardId === boardId) :
     DB[table];
@@ -67,4 +68,4 @@ const remove = async (table, id) => {
   return DB[table].splice(index, 1);
 };
 
-module.exports = {getAll, getById, create, update, remove, getTasksOfBoards, removeTasksByBoard, updateUserIdOfTask};
+module.exports = {getAll, getById, create, update, remove, getTasksOfBoards, removeTasksByBoard, updateUserIdOfTask, getSize};

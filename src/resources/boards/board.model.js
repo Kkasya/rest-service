@@ -1,8 +1,7 @@
-const {v4: uuid} = require('uuid');
+let initialId = 0;
 
 class Board {
   constructor({
-                id = uuid(),
                 title = 'First board',
                 columns = [
                   {
@@ -11,15 +10,15 @@ class Board {
                   }
                 ]
               } = {}) {
-    this.id = id;
+    this.id = Board.getId();
     this.title = title;
     this.columns = [...columns];
   }
 
-  // static toResponse(board) {
-  //   const { id, name, login } = user;
-  //   return { id, name, login };
-  // }
+  static getId() {
+    initialId += 1;
+    return initialId.toString();
+  }
 }
 
 module.exports = Board;
