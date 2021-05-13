@@ -4,14 +4,13 @@ const tasksService = require('./task.sercive');
 router.route('/').get(async (req, res) => {
   const {boardId} = req.params;
   const tasks = await tasksService.getAll(boardId);
-  console.log(tasks)
   res.json(tasks);
 });
 
 router.route('/:id').get(async (req, res) => {
   try {
-    const {id} = req.params;
-    const task = await tasksService.getById(id);
+    const {id, boardId} = req.params;
+    const task = await tasksService.getById(id, boardId);
     res.json(task);
   } catch (e) {
     res.status(404).send(e.message);

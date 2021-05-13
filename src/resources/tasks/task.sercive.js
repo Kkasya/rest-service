@@ -2,7 +2,7 @@ const taskRepo = require('./task.memory.repositor');
 
 const getAll = (boardId) => taskRepo.getAll(boardId);
 
-const getById = (id) => taskRepo.getById(id);
+const getById = (id, boardId) => taskRepo.getById(id, boardId);
 
 const setNew = (newTask) => taskRepo.setNew(newTask);
 

@@ -20,7 +20,10 @@ const setNew = async ({name, login, password}) => {
 
 const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
 
-const remove = async (id) => DB.remove('Users', id);
+const remove = async (id) => {
+  await DB.updateUserIdOfTask(id);
+  return DB.remove('Users', id);
+}
 
 module.exports = { getAll, getById, setNew, update, remove };
 

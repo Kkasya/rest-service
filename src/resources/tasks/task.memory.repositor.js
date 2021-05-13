@@ -3,8 +3,8 @@ const Task = require('./task.model');
 
 const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
 
-const getById = async (id) => {
-  const task = await DB.getById('Tasks', id);
+const getById = async (id, boardId) => {
+  const task = await DB.getById('Tasks', id, boardId);
   if (!task) {
     throw new Error(`The task with id ${id} is not exist.`);
   }

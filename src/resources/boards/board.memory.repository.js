@@ -20,7 +20,10 @@ const setNew = async ({title, columns}) => {
 
 const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard);
 
-const remove = async (id) => DB.remove('Boards', id);
+const remove = async (id) => {
+  await DB.removeTasksByBoard(id);
+  return DB.remove('Boards', id);
+};
 
 module.exports = { getAll, getById, setNew, update, remove };
 
