@@ -10,9 +10,7 @@ const DB = {
 DB.Users.push(new User(), new User());
 DB.Boards.push(new Board());
 
-const getAll = async (table) =>
-  JSON.parse(JSON.stringify(DB[table]))
-;
+const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
 
 const getById = async (table, id) => DB[table].filter((user) => user.id === id)[0];
 
@@ -32,16 +30,16 @@ const update = async (table, id, updatedItem) => {
   DB[table].splice(index, 1, newItem);
 
   return updatedItem;
-}
+};
 
 const remove = async (table, id) => {
   const index = await DB[table].findIndex((item) => item.id === id);
   if (index === -1) {
     throw new Error(`The entity with id ${id} is not exist.`);
   }
-  const removedItem = DB[table].splice(index, 1);
+  return DB[table].splice(index, 1);
+};
 
-  return removedItem;
-}
+const getTasksOfBoards = async (boardId) => DB.Tasks.filter((task) => task.boardId === boardId)
 
-module.exports = {getAll, getById, create, update, remove};
+module.exports = {getAll, getById, create, update, remove, getTasksOfBoards};
