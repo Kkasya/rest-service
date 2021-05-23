@@ -1,7 +1,6 @@
 const DB = require('../../common/Db');
 const User = require('./user.model');
 
-
 /**
  * Get all entries of Users
  * @return {Array<User>}
@@ -10,8 +9,8 @@ const User = require('./user.model');
 const getAll = async () => DB.getAll('Users');
 
 /**
- * Get the entry of Users by the id
- * @param {String} id - the id of the entry
+ * Get the user by the id
+ * @param {String} id - the id of the user
  * @return {User}
  */
 

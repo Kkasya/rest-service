@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: resources/users/user.memory.repository.js</title>
+    <title>JSDoc: Source: resources/boards/board.memory.repository.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: resources/users/user.memory.repository.js</h1>
+    <h1 class="page-title">Source: resources/boards/board.memory.repository.js</h1>
 
     
 
@@ -27,59 +27,60 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const DB = require('../../common/Db');
-const User = require('./user.model');
+const Board = require('./board.model');
 
 /**
- * Get all entries of Users
- * @return {Array&lt;User>}
+ * Get all entries of Board
+ * @return {Array&lt;Board>}
  */
 
-const getAll = async () => DB.getAll('Users');
+const getAll = async () => DB.getAll('Boards');
 
 /**
- * Get the user by the id
- * @param {String} id - the id of the user
- * @return {User}
+ * Get the board by the id
+ * @param {String} id - the id of the board
+ * @return {Board}
  */
 
 const getById = async (id) => {
-  const user = await DB.getById('Users', id);
-  if (!user) {
-    throw new Error(`The user with id ${id} is not exist.`);
+  const board = await DB.getById('Boards', id);
+  if (!board) {
+    throw new Error(`The board with id ${id} is not exist.`);
   }
-  return user;
+
+  return board;
 };
 
 /**
- * Create new User
- * @param {User} User - the new User
- * @return {User}
+ * Create new Board
+ * @param {Board} Board - the new Board
+ * @return {Board}
  */
 
-const setNew = async ({name, login, password}) => {
-  const user = new User({name, login, password});
-  return DB.create('Users', user);
+const setNew = async ({title, columns}) => {
+  const board = new Board({title, columns});
+  return DB.create('Boards', board);
 };
 
 /**
- * Update the user
- * @param {String} id - user id
- * @param {User} updatedUser - the updated user
- * @return {User}
+ * Update the board
+ * @param {String} id - board id
+ * @param {Board} updatedBoard - the updated board
+ * @return {Board}
  */
 
-const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
+const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard);
 
 /**
- * Remove the user by the id
- * @param {String} id - the user id
+ * Remove the board by the id
+ * @param {String} id - the board id
  * @return {void}
  */
 
 const remove = async (id) => {
-  await DB.updateUserIdOfTask(id);
-  return DB.remove('Users', id);
-}
+  await DB.removeTasksByBoard(id);
+  return DB.remove('Boards', id);
+};
 
 module.exports = { getAll, getById, setNew, update, remove };
 

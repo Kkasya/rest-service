@@ -29,7 +29,7 @@ DB.Boards.push(new Board());
 /**
  * A Board
  * @typedef {Object} Board
- * @property {String} id - Board id
+ * @property {String} [id] - Board id
  * @property {String} title - Board title
  * @property {Array<Column>} columns - Board columns
  */
@@ -66,7 +66,7 @@ const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
  * Get the entry of the table by the id
  * @param {String} table - the name table in the DB
  * @param {String} id - the id of the entry
- * @param {Number} [boardId] - the id of the board
+ * @param {String} [boardId] - the id of the board
  * @return {User|Board|Task}
  */
 
