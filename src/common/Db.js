@@ -11,6 +11,43 @@ DB.Users.push(new User(), new User());
 DB.Boards.push(new Board());
 
 /**
+ * A User
+ * @typedef {Object} User
+ * @property {String} id - User id
+ * @property {String} name - User name
+ * @property {String} login - User login
+ * @property {String} password - User password
+ */
+
+/**
+ * A Column
+ * @typedef {Object} Column
+ * @property {String} title - Column title
+ * @property {Number} order - Column order
+ */
+
+/**
+ * A Board
+ * @typedef {Object} Board
+ * @property {String} id - Board id
+ * @property {String} title - Board title
+ * @property {Array<Column>} columns - Board columns
+ */
+
+/**
+ * A Task
+ * @typedef {Object} Task
+ * @property {String} id - Task id
+ * @property {String} title - Task title
+ * @property {Number} order - Task order
+ * @property {String} description - Task description
+ * @property {String} userId - Task userId
+ * @property {String} boardId - Task boardId
+ * @property {String} columnId - Task columnId
+ */
+
+
+/**
  * Get the size of the table
  * @param {String} table - the name the table in the DB
  * @return {Number}
@@ -31,7 +68,7 @@ const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
  * @param {String} table - the name table in the DB
  * @param {String} id - the id of the entry
  * @param {Number} [boardId] - the id of the board
- * @return {Object}
+ * @return {User|Board|Task}
  */
 
 const getById = async (table, id, boardId) => {
@@ -44,8 +81,8 @@ const getById = async (table, id, boardId) => {
 /**
  * Create the entry of the table
  * @param {String} table - the name table in the DB
- * @param {Object} item - the new item for the table
- * @return {Object}
+ * @param {User|Board|Task} item - the new item for the table
+ * @return {User|Board|Task}
  */
 
 const create = async (table, item) => {
@@ -57,11 +94,12 @@ const create = async (table, item) => {
  * Update the entry of the table
  * @param {String} table - the name table in the DB
  * @param {String} id - id of the entry
- * @param {Object} updatedItem - the updated item for the table
- * @return {Object}
+ * @param {User|Board|Task} updatedItem - the updated item for the table
+ * @return {User|Board|Task}
  */
 
 const update = async (table, id, updatedItem) => {
+  console.log(updatedItem)
   const index = await DB[table].findIndex((item) => item.id === id);
   if (index === -1) {
     throw new Error(`The entity with id ${id} is not exist.`);
@@ -76,7 +114,7 @@ const update = async (table, id, updatedItem) => {
 /**
  * Get all tasks of the board
  * @param {String} boardId -  the id of the board
- * @return {Array}
+ * @return {Array<User|Board|Task>}
  */
 
 const getTasksOfBoards = async (boardId) => DB.Tasks.filter((task) => task.boardId === boardId)
@@ -115,7 +153,7 @@ const updateUserIdOfTask = async (userId) => {
  * Remove the item of the table
  * @param {String} table - the table of the DB
  * @param {String} id - the id of the item
- * @return {Array}
+ * @return {Array<User|Board|Task>}
  */
 
 const remove = async (table, id) => {
