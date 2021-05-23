@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Rest service</title>
+    <title>JSDoc: Source: resources/users/user.memory.repository.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,59 @@
 
 <div id="main">
 
-    <h1 class="page-title">Rest service</h1>
+    <h1 class="page-title">Source: resources/users/user.memory.repository.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const DB = require('../../common/Db');
+const User = require('./user.model');
 
 
-    <h3> </h3>
+/**
+ * Get all entries of Users
+ * @return {Array&lt;User>}
+ */
+
+const getAll = async () => DB.getAll('Users');
+
+/**
+ * Get the entry of Users by the id
+ * @param {String} id - the id of the entry
+ * @return {User}
+ */
+
+const getById = async (id) => {
+  const user = await DB.getById('Users', id);
+  if (!user) {
+    throw new Error(`The user with id ${id} is not exist.`);
+  }
+  return user;
+};
+
+const setNew = async ({name, login, password}) => {
+  const user = new User({name, login, password});
+  return DB.create('Users', user);
+};
 
 
+const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
+
+const remove = async (id) => {
+  await DB.updateUserIdOfTask(id);
+  return DB.remove('Users', id);
+}
+
+module.exports = { getAll, getById, setNew, update, remove };
 
 
-
-
-
-
-
-
-    
-
-
-
-
-
+</code></pre>
+        </article>
+    </section>
 
 
 
