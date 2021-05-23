@@ -21,7 +21,7 @@ router.route('/').post(async (req, res) => {
   const {boardId} = req.params;
   const newTask = {...req.body, boardId};
   const task = await tasksService.setNew(newTask);
-  res.status(201).send(res.json(task));
+  res.status(201).json(task);
 });
 
 router.route('/:id').put(async (req, res) => {

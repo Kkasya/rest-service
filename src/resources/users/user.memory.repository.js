@@ -8,7 +8,6 @@ const getById = async (id) => {
   if (!user) {
     throw new Error(`The user with id ${id} is not exist.`);
   }
-
   return user;
 };
 

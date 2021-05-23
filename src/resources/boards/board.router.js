@@ -38,7 +38,7 @@ router.route('/:id').delete(async (req, res) => {
   try {
     const {id} = req.params;
     const board = await boardService.remove(id);
-    res.status(204).send(res.json(board));
+    res.status(204).json(board);
   } catch (e) {
     res.status(404).send(e.message);
   }
