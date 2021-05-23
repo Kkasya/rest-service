@@ -3,7 +3,7 @@ const Board = require('./board.model');
 
 /**
  * Get all entries of Board
- * @return {Array<Board>}
+ * @return {Array<Board>} all boards
  */
 
 const getAll = async () => DB.getAll('Boards');
@@ -11,7 +11,7 @@ const getAll = async () => DB.getAll('Boards');
 /**
  * Get the board by the id
  * @param {String} id - the id of the board
- * @return {Board}
+ * @return {Board} the board by the id
  */
 
 const getById = async (id) => {
@@ -26,7 +26,7 @@ const getById = async (id) => {
 /**
  * Create new Board
  * @param {Board} Board - the new Board
- * @return {Board}
+ * @return {Board} new board
  */
 
 const setNew = async ({title, columns}) => {
@@ -38,7 +38,7 @@ const setNew = async ({title, columns}) => {
  * Update the board
  * @param {String} id - board id
  * @param {Board} updatedBoard - the updated board
- * @return {Board}
+ * @return {Board} updated board
  */
 
 const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard);

@@ -49,7 +49,7 @@ DB.Boards.push(new Board());
 /**
  * Get the size of the table
  * @param {String} table - the name the table in the DB
- * @return {Number}
+ * @return {Number} the size of the table
  */
 
 const getSize = async (table) => DB[table].length;
@@ -57,7 +57,7 @@ const getSize = async (table) => DB[table].length;
 /**
  * Get all entries of the table
  * @param {String} table - the name the table in the DB
- * @return {Array<User|Board|Task>}
+ * @return {Array<User|Board|Task>} all entries of the table
  */
 
 const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
@@ -67,7 +67,7 @@ const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
  * @param {String} table - the name table in the DB
  * @param {String} id - the id of the entry
  * @param {String} [boardId] - the id of the board
- * @return {User|Board|Task}
+ * @return {User|Board|Task} the entry of the table
  */
 
 const getById = async (table, id, boardId) => {
@@ -81,7 +81,7 @@ const getById = async (table, id, boardId) => {
  * Create the entry of the table
  * @param {String} table - the name table in the DB
  * @param {User|Board|Task} item - the new item for the table
- * @return {User|Board|Task}
+ * @return {User|Board|Task} the entry of the table
  */
 
 const create = async (table, item) => {
@@ -94,7 +94,7 @@ const create = async (table, item) => {
  * @param {String} table - the name table in the DB
  * @param {String} id - id of the entry
  * @param {User|Board|Task} updatedItem - the updated item for the table
- * @return {User|Board|Task}
+ * @return {User|Board|Task} the entry of the table
  */
 
 const update = async (table, id, updatedItem) => {
@@ -112,7 +112,7 @@ const update = async (table, id, updatedItem) => {
 /**
  * Get all tasks of the board
  * @param {String} boardId -  the id of the board
- * @return {Array<User|Board|Task>}
+ * @return {Array<User|Board|Task>} all tasks of the board
  */
 
 const getTasksOfBoards = async (boardId) => DB.Tasks.filter((task) => task.boardId === boardId)
@@ -151,7 +151,7 @@ const updateUserIdOfTask = async (userId) => {
  * Remove the item of the table
  * @param {String} table - the table of the DB
  * @param {String} id - the id of the item
- * @return {Array<User|Board|Task>}
+ * @return {Array<User|Board|Task>} removed item of the table
  */
 
 const remove = async (table, id) => {

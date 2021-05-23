@@ -4,7 +4,7 @@ const Task = require('./task.model');
 /**
  * Get all entries of Tasks of the board
  * @param {String} boardId - the board id
- * @return {Array<Task>}
+ * @return {Array<Task>} all tasks of the board
  */
 
 const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
@@ -13,7 +13,7 @@ const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
  * Get the task by the id
  * @param {String} id - the id of the task
  * @param {String} boardId - the board id
- * @return {Task}
+ * @return {Task} the task by the id
  */
 
 const getById = async (id, boardId) => {
@@ -27,7 +27,7 @@ const getById = async (id, boardId) => {
 /**
  * Create new Task
  * @param {Task} newTask - the new Task
- * @return {Task}
+ * @return {Task} new task
  */
 
 const setNew = async (newTask) => {
@@ -39,7 +39,7 @@ const setNew = async (newTask) => {
  * Update the task
  * @param {String} id - task id
  * @param {Task} updatedTask - the updated task
- * @return {Task}
+ * @return {Task} updated task
  */
 
 const update = async (id, updatedTask) => DB.update('Tasks', id, updatedTask);

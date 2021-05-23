@@ -3,7 +3,7 @@ const User = require('./user.model');
 
 /**
  * Get all entries of Users
- * @return {Array<User>}
+ * @return {Array<User>} all users
  */
 
 const getAll = async () => DB.getAll('Users');
@@ -11,7 +11,7 @@ const getAll = async () => DB.getAll('Users');
 /**
  * Get the user by the id
  * @param {String} id - the id of the user
- * @return {User}
+ * @return {User} the user by the id
  */
 
 const getById = async (id) => {
@@ -25,7 +25,7 @@ const getById = async (id) => {
 /**
  * Create new User
  * @param {User} User - the new User
- * @return {User}
+ * @return {User} new user
  */
 
 const setNew = async ({name, login, password}) => {
@@ -37,7 +37,7 @@ const setNew = async ({name, login, password}) => {
  * Update the user
  * @param {String} id - user id
  * @param {User} updatedUser - the updated user
- * @return {User}
+ * @return {User} updated user
  */
 
 const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
