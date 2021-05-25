@@ -1,4 +1,4 @@
-const boardsRepo = require('./board.memory.repository');
+import boardsRepo = require('./board.memory.repository.ts');
 
 const getAll = () => boardsRepo.getAll();
 

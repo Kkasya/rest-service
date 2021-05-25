@@ -1,5 +1,5 @@
-const DB = require('../../common/Db');
-const Board = require('./board.model');
+import * as DB from '../../common/Db';
+import {Board} from './board.model';
 
 /**
  * Get all entries of Board
@@ -15,7 +15,7 @@ const getAll = async () => DB.getAll('Boards');
  */
 
 const getById = async (id) => {
-  const board = await DB.getById('Boards', id);
+  const board = await DB.getById('Boards', id, undefined);
   if (!board) {
     throw new Error(`The board with id ${id} is not exist.`);
   }
@@ -54,6 +54,6 @@ const remove = async (id) => {
   return DB.remove('Boards', id);
 };
 
-module.exports = { getAll, getById, setNew, update, remove };
+export { getAll, getById, setNew, update, remove };
 
 

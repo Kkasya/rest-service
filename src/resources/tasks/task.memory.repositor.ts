@@ -1,5 +1,5 @@
-const DB = require('../../common/Db');
-const Task = require('./task.model');
+import * as DB from '../../common/Db';
+import {Task} from './task.model';
 
 /**
  * Get all entries of Tasks of the board
@@ -52,6 +52,6 @@ const update = async (id, updatedTask) => DB.update('Tasks', id, updatedTask);
 
 const remove = async (id) => DB.remove('Tasks', id);
 
-module.exports = { getAll, getById, setNew, update, remove };
+export { getAll, getById, setNew, update, remove };
 
 

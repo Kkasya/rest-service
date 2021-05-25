@@ -1,5 +1,5 @@
-const DB = require('../../common/Db');
-const User = require('./user.model');
+import * as DB from '../../common/Db';
+import {User} from './user.model';
 
 /**
  * Get all entries of Users
@@ -53,6 +53,6 @@ const remove = async (id) => {
   return DB.remove('Users', id);
 }
 
-module.exports = { getAll, getById, setNew, update, remove };
+export { getAll, getById, setNew, update, remove };
 
 

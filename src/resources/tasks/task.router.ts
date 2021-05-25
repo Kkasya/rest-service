@@ -1,5 +1,7 @@
-const router = require('express').Router({mergeParams: true});
-const tasksService = require('./task.sercive');
+import routerDefault = require('express');
+import * as tasksService from './task.sercive';
+
+const router = routerDefault.Router({mergeParams: true});
 
 router.route('/').get(async (req, res) => {
   const {boardId} = req.params;
@@ -45,4 +47,4 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
-module.exports = router;
+export {router};

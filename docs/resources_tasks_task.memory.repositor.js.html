@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: resources/tasks/task.memory.repositor.js</title>
+    <title>JSDoc: Source: resources/tasks/task.memory.repositor.ts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: resources/tasks/task.memory.repositor.js</h1>
+    <h1 class="page-title">Source: resources/tasks/task.memory.repositor.ts</h1>
 
     
 
@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const DB = require('../../common/Db');
+            <pre class="prettyprint source linenums"><code>const Db = require('../../common/Db');
 const Task = require('./task.model');
 
 /**
@@ -35,7 +35,7 @@ const Task = require('./task.model');
  * @return {Array&lt;Task>}
  */
 
-const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
+const getAll = async (boardId) => Db.getTasksOfBoards(boardId);
 
 /**
  * Get the task by the id
@@ -45,7 +45,7 @@ const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
  */
 
 const getById = async (id, boardId) => {
-  const task = await DB.getById('Tasks', id, boardId);
+  const task = await Db.getById('Tasks', id, boardId);
   if (!task) {
     throw new Error(`The task with id ${id} is not exist.`);
   }
@@ -60,7 +60,7 @@ const getById = async (id, boardId) => {
 
 const setNew = async (newTask) => {
   const task = new Task(newTask);
-  return DB.create('Tasks', task);
+  return Db.create('Tasks', task);
 };
 
 /**
@@ -70,7 +70,7 @@ const setNew = async (newTask) => {
  * @return {Task}
  */
 
-const update = async (id, updatedTask) => DB.update('Tasks', id, updatedTask);
+const update = async (id, updatedTask) => Db.update('Tasks', id, updatedTask);
 
 /**
  * Remove the task by the id
@@ -78,7 +78,7 @@ const update = async (id, updatedTask) => DB.update('Tasks', id, updatedTask);
  * @return {void}
  */
 
-const remove = async (id) => DB.remove('Tasks', id);
+const remove = async (id) => Db.remove('Tasks', id);
 
 module.exports = { getAll, getById, setNew, update, remove };
 

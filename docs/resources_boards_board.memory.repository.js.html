@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: resources/boards/board.memory.repository.js</title>
+    <title>JSDoc: Source: resources/boards/board.memory.repository.ts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: resources/boards/board.memory.repository.js</h1>
+    <h1 class="page-title">Source: resources/boards/board.memory.repository.ts</h1>
 
     
 
@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const DB = require('../../common/Db');
+            <pre class="prettyprint source linenums"><code>const Db = require('../../common/Db');
 const Board = require('./board.model');
 
 /**
@@ -34,7 +34,7 @@ const Board = require('./board.model');
  * @return {Array&lt;Board>}
  */
 
-const getAll = async () => DB.getAll('Boards');
+const getAll = async () => Db.getAll('Boards');
 
 /**
  * Get the board by the id
@@ -43,7 +43,7 @@ const getAll = async () => DB.getAll('Boards');
  */
 
 const getById = async (id) => {
-  const board = await DB.getById('Boards', id);
+  const board = await Db.getById('Boards', id);
   if (!board) {
     throw new Error(`The board with id ${id} is not exist.`);
   }
@@ -59,7 +59,7 @@ const getById = async (id) => {
 
 const setNew = async ({title, columns}) => {
   const board = new Board({title, columns});
-  return DB.create('Boards', board);
+  return Db.create('Boards', board);
 };
 
 /**
@@ -69,7 +69,7 @@ const setNew = async ({title, columns}) => {
  * @return {Board}
  */
 
-const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard);
+const update = async (id, updatedBoard) => Db.update('Boards', id, updatedBoard);
 
 /**
  * Remove the board by the id
@@ -78,8 +78,8 @@ const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard)
  */
 
 const remove = async (id) => {
-  await DB.removeTasksByBoard(id);
-  return DB.remove('Boards', id);
+  await Db.removeTasksByBoard(id);
+  return Db.remove('Boards', id);
 };
 
 module.exports = { getAll, getById, setNew, update, remove };

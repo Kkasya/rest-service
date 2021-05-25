@@ -1,5 +1,5 @@
-const User = require('../resources/users/user.model');
-const Board = require('../resources/boards/board.model');
+import {User} from '../resources/users/user.model';
+import {Board} from '../resources/boards/board.model';
 
 const DB = {
   Users: [],
@@ -163,4 +163,4 @@ const remove = async (table, id) => {
   return DB[table].splice(index, 1);
 };
 
-module.exports = {getAll, getById, create, update, remove, getTasksOfBoards, removeTasksByBoard, updateUserIdOfTask, getSize};
+export {getAll, getById, create, update, remove, getTasksOfBoards, removeTasksByBoard, updateUserIdOfTask, getSize};

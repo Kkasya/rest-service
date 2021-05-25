@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: common/Db.js</title>
+    <title>JSDoc: Source: common/Db.ts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: common/Db.js</h1>
+    <h1 class="page-title">Source: common/Db.ts</h1>
 
     
 
@@ -29,14 +29,14 @@
             <pre class="prettyprint source linenums"><code>const User = require('../resources/users/user.model');
 const Board = require('../resources/boards/board.model');
 
-const DB = {
+const Db = {
   Users: [],
   Boards: [],
   Tasks: []
 };
 
-DB.Users.push(new User(), new User());
-DB.Boards.push(new Board());
+Db.Users.push(new User(), new User());
+Db.Boards.push(new Board());
 
 /**
  * A User
@@ -76,23 +76,23 @@ DB.Boards.push(new Board());
 
 /**
  * Get the size of the table
- * @param {String} table - the name the table in the DB
+ * @param {String} table - the name the table in the Db
  * @return {Number}
  */
 
-const getSize = async (table) => DB[table].length;
+const getSize = async (table) => Db[table].length;
 
 /**
  * Get all entries of the table
- * @param {String} table - the name the table in the DB
+ * @param {String} table - the name the table in the Db
  * @return {Array&lt;User|Board|Task>}
  */
 
-const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
+const getAll = async (table) => JSON.parse(JSON.stringify(Db[table]));
 
 /**
  * Get the entry of the table by the id
- * @param {String} table - the name table in the DB
+ * @param {String} table - the name table in the Db
  * @param {String} id - the id of the entry
  * @param {String} [boardId] - the id of the board
  * @return {User|Board|Task}
@@ -100,39 +100,39 @@ const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
 
 const getById = async (table, id, boardId) => {
   const data = boardId ?
-    DB[table].filter((item) => item.boardId === boardId) :
-    DB[table];
+    Db[table].filter((item) => item.boardId === boardId) :
+    Db[table];
   return data.filter((item) => item.id === id)[0];
 }
 
 /**
  * Create the entry of the table
- * @param {String} table - the name table in the DB
+ * @param {String} table - the name table in the Db
  * @param {User|Board|Task} item - the new item for the table
  * @return {User|Board|Task}
  */
 
 const create = async (table, item) => {
-  DB[table].push(item);
+  Db[table].push(item);
   return item;
 };
 
 /**
  * Update the entry of the table
- * @param {String} table - the name table in the DB
+ * @param {String} table - the name table in the Db
  * @param {String} id - id of the entry
  * @param {User|Board|Task} updatedItem - the updated item for the table
  * @return {User|Board|Task}
  */
 
 const update = async (table, id, updatedItem) => {
-  const index = await DB[table].findIndex((item) => item.id === id);
+  const index = await Db[table].findIndex((item) => item.id === id);
   if (index === -1) {
     throw new Error(`The entity with id ${id} is not exist.`);
   }
-  const oldItem = DB[table][index];
+  const oldItem = Db[table][index];
   const newItem = {...oldItem, ...updatedItem};
-  DB[table].splice(index, 1, newItem);
+  Db[table].splice(index, 1, newItem);
 
   return updatedItem;
 };
@@ -143,7 +143,7 @@ const update = async (table, id, updatedItem) => {
  * @return {Array&lt;User|Board|Task>}
  */
 
-const getTasksOfBoards = async (boardId) => DB.Tasks.filter((task) => task.boardId === boardId)
+const getTasksOfBoards = async (boardId) => Db.Tasks.filter((task) => task.boardId === boardId)
 
 /**
  * Remove all tasks of the board
@@ -157,7 +157,7 @@ const removeTasksByBoard = async (boardId) => {
   tasks.forEach((item) => {
     if (item.boardId !== boardId) updatedTasks.push(item);
   });
-  DB.Tasks = updatedTasks;
+  Db.Tasks = updatedTasks;
 };
 
 /**
@@ -172,23 +172,23 @@ const updateUserIdOfTask = async (userId) => {
   tasks.forEach((task) => {
     if (task.userId === userId) updatedTasks.push({...task, userId: null});
   });
-  DB.Tasks = updatedTasks;
+  Db.Tasks = updatedTasks;
 };
 
 /**
  * Remove the item of the table
- * @param {String} table - the table of the DB
+ * @param {String} table - the table of the Db
  * @param {String} id - the id of the item
  * @return {Array&lt;User|Board|Task>}
  */
 
 const remove = async (table, id) => {
-  const index = await DB[table].findIndex((item) => item.id === id);
+  const index = await Db[table].findIndex((item) => item.id === id);
   if (index === -1) {
     throw new Error(`The entity with id ${id} is not exist.`);
   }
   if (table === 'Board') await removeTasksByBoard(id);
-  return DB[table].splice(index, 1);
+  return Db[table].splice(index, 1);
 };
 
 module.exports = {getAll, getById, create, update, remove, getTasksOfBoards, removeTasksByBoard, updateUserIdOfTask, getSize};</code></pre>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: resources/users/user.memory.repository.js</title>
+    <title>JSDoc: Source: resources/users/user.memory.repository.ts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: resources/users/user.memory.repository.js</h1>
+    <h1 class="page-title">Source: resources/users/user.memory.repository.ts</h1>
 
     
 
@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const DB = require('../../common/Db');
+            <pre class="prettyprint source linenums"><code>const Db = require('../../common/Db');
 const User = require('./user.model');
 
 /**
@@ -34,7 +34,7 @@ const User = require('./user.model');
  * @return {Array&lt;User>}
  */
 
-const getAll = async () => DB.getAll('Users');
+const getAll = async () => Db.getAll('Users');
 
 /**
  * Get the user by the id
@@ -43,7 +43,7 @@ const getAll = async () => DB.getAll('Users');
  */
 
 const getById = async (id) => {
-  const user = await DB.getById('Users', id);
+  const user = await Db.getById('Users', id);
   if (!user) {
     throw new Error(`The user with id ${id} is not exist.`);
   }
@@ -58,7 +58,7 @@ const getById = async (id) => {
 
 const setNew = async ({name, login, password}) => {
   const user = new User({name, login, password});
-  return DB.create('Users', user);
+  return Db.create('Users', user);
 };
 
 /**
@@ -68,7 +68,7 @@ const setNew = async ({name, login, password}) => {
  * @return {User}
  */
 
-const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
+const update = async (id, updatedUser) => Db.update('Users', id, updatedUser);
 
 /**
  * Remove the user by the id
@@ -77,8 +77,8 @@ const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
  */
 
 const remove = async (id) => {
-  await DB.updateUserIdOfTask(id);
-  return DB.remove('Users', id);
+  await Db.updateUserIdOfTask(id);
+  return Db.remove('Users', id);
 }
 
 module.exports = { getAll, getById, setNew, update, remove };
