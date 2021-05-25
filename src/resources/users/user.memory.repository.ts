@@ -14,8 +14,8 @@ const getAll = async () => DB.getAll('Users');
  * @return {User} the user by the id
  */
 
-const getById = async (id) => {
-  const user = await DB.getById('Users', id);
+const getById = async (id: string) => {
+  const user: {id: string, name: string, login: string, password: string} = await DB.getById('Users', id);
   if (!user) {
     throw new Error(`The user with id ${id} is not exist.`);
   }
@@ -28,7 +28,7 @@ const getById = async (id) => {
  * @return {User} new user
  */
 
-const setNew = async ({name, login, password}) => {
+const setNew = async ({name, login, password}: {name: string, login: string, password: string}) => {
   const user = new User({name, login, password});
   return DB.create('Users', user);
 };
@@ -40,7 +40,9 @@ const setNew = async ({name, login, password}) => {
  * @return {User} updated user
  */
 
-const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
+const update = async (id: string, updatedUser: {name: string, login: string, password: string}) => {
+  return DB.update('Users', id, updatedUser);
+}
 
 /**
  * Remove the user by the id
@@ -48,7 +50,7 @@ const update = async (id, updatedUser) => DB.update('Users', id, updatedUser);
  * @return {void}
  */
 
-const remove = async (id) => {
+const remove = async (id:string) => {
   await DB.updateUserIdOfTask(id);
   return DB.remove('Users', id);
 }

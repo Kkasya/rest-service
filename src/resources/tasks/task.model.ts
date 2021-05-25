@@ -1,6 +1,14 @@
-let initialId = 0;
+let initialId: number = 0;
 
 class Task {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  boardId: string;
+  columnId: string;
+
   constructor({
                 title = 'First',
                 order = 0,

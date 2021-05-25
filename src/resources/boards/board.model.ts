@@ -1,6 +1,10 @@
-let initialId = 0;
+let initialId: number = 0;
 
 class Board {
+  id: string;
+  title: string;
+  columns: Array<{ order: number, title: string }>;
+
   constructor({
                 title = 'First board',
                 columns = [

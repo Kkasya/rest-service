@@ -70,7 +70,7 @@ const getAll = async (table) => JSON.parse(JSON.stringify(DB[table]));
  * @return {User|Board|Task} the entry of the table
  */
 
-const getById = async (table, id, boardId) => {
+const getById = async (table: string, id: string, boardId?: string) => {
   const data = boardId ?
     DB[table].filter((item) => item.boardId === boardId) :
     DB[table];

@@ -12,8 +12,10 @@ router.route('/').get(async ({}, res) => {
 router.route('/:id').get(async (req, res) => {
   try {
     const {id} = req.params;
-    const user = await usersService.getById(id);
-    res.json(User.toResponse(user));
+    if (id) {
+      const user = await usersService.getById(id);
+      res.json(User.toResponse(user));
+    }
   } catch (e) {
     res.status(404).send(e.message);
   }
@@ -29,8 +31,10 @@ router.route('/:id').put(async (req, res) => {
   try {
     const {id} = req.params;
     const updatedUser = req.body;
-    const user = await usersService.update(id, updatedUser);
-    res.json(User.toResponse(user));
+    if (id) {
+      const user = await usersService.update(id, updatedUser);
+      res.json(User.toResponse(user));
+    }
   } catch (e) {
     res.status(404).send(e.message);
   }
@@ -39,8 +43,10 @@ router.route('/:id').put(async (req, res) => {
 router.route('/:id').delete(async (req, res) => {
   try {
     const {id} = req.params;
-    const user = await usersService.remove(id);
-    res.status(204).json(User.toResponse(user));
+    if (id) {
+      const user = await usersService.remove(String(id));
+      res.status(204).json(User.toResponse(user));
+    }
   } catch (e) {
     res.status(404).send(e.message);
   }
