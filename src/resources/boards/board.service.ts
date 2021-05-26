@@ -1,14 +1,14 @@
 import boardsRepo = require('./board.memory.repository');
 import {BoardProp} from "../../common/interfaces";
 
-const getAll = () => boardsRepo.getAll();
+const getAll = (): Promise<BoardProp[]> => boardsRepo.getAll();
 
-const getById = (id: string) => boardsRepo.getById(id);
+const getById = (id: string): Promise<BoardProp> => boardsRepo.getById(id);
 
-const setNew = (newBoard: BoardProp) => boardsRepo.setNew(newBoard);
+const setNew = (newBoard: BoardProp): Promise<BoardProp> => boardsRepo.setNew(newBoard);
 
-const update = (id: string, updatedBoard: BoardProp) => boardsRepo.update(id, updatedBoard);
+const update = (id: string, updatedBoard: BoardProp): Promise<BoardProp> => boardsRepo.update(id, updatedBoard);
 
-const remove = (id: string) => boardsRepo.remove(id);
+const remove = (id: string): Promise<BoardProp> => boardsRepo.remove(id);
 
 export { getAll, getById, setNew, update, remove };

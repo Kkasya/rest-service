@@ -1,13 +1,9 @@
-import {User} from '../resources/users/user.model';
-import {Board} from '../resources/boards/board.model';
+// import {User} from '../resources/users/user.model';
+// import {Board} from '../resources/boards/board.model';
 import {BoardProp, TaskProp, UserProp} from "./interfaces";
-// { [key: string]: Array<{id: string, name: string, login: string, password: string}> } |
-// {[key: string]:Array<{id: string,  title: string, columns: Array<{ order: number, title: string }>}> } |
-// {[key: string]:Array<{id: string, title: string,  order: number,  description: string,  userId: string,  boardId: string, columnId: string}>
-// }
 
 interface DbProp {
-  [table: string]:  Array<UserProp> | Array<BoardProp> | Array<TaskProp>;
+  [table: string]: any[];  //Array<UserProp> | Array<BoardProp> | Array<TaskProp>;
 }
 const DB: DbProp  = {
   Users: [],
@@ -15,8 +11,8 @@ const DB: DbProp  = {
   Tasks: []
 };
 
- DB['Users'].push(new User(), new User());
- DB['Boards'].push(new Board());
+ /// DB['Users'].push(new User(), new User());
+ // DB['Boards'].push(new Board());
 
 /**
  * A User
@@ -170,7 +166,7 @@ const remove = async (table: string, id: string) => {
     throw new Error(`The entity with id ${id} is not exist.`);
   }
   if (table === 'Board') await removeTasksByBoard(id);
-  return DB[table].splice(index, 1);
+  return DB[table].splice(index, 1)[0];
 };
 
 export {getAll, getById, create, update, remove, getTasksOfBoards, removeTasksByBoard, updateUserIdOfTask, getSize};

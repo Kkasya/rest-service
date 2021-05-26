@@ -4,18 +4,18 @@ import {UserProp} from "../../common/interfaces";
 
 /**
  * Get all entries of Users
- * @return {Array<User>} all users
+ * @return {Promise<User[]>} all users
  */
 
-const getAll = async () => DB.getAll('Users');
+const getAll = async (): Promise<UserProp[]> => DB.getAll('Users');
 
 /**
  * Get the user by the id
  * @param {String} id - the id of the user
- * @return {User} the user by the id
+ * @return {Promise<User>} the user by the id
  */
 
-const getById = async (id: string) => {
+const getById = async (id: string): Promise<UserProp> => {
   const user: UserProp = await DB.getById('Users', id);
   if (!user) {
     throw new Error(`The user with id ${id} is not exist.`);
@@ -26,10 +26,10 @@ const getById = async (id: string) => {
 /**
  * Create new User
  * @param {User} User - the new User
- * @return {User} new user
+ * @return {Promise<User>} new user
  */
 
-const setNew = async ({name, login, password}: UserProp) => {
+const setNew = async ({name, login, password}: UserProp): Promise<UserProp> => {
   const user: UserProp = new User({name, login, password});
   return DB.create('Users', user);
 };
@@ -38,20 +38,20 @@ const setNew = async ({name, login, password}: UserProp) => {
  * Update the user
  * @param {String} id - user id
  * @param {User} updatedUser - the updated user
- * @return {User} updated user
+ * @return {Promise<User>} updated user
  */
 
-const update = async (id: string, updatedUser: UserProp) => {
+const update = async (id: string, updatedUser: UserProp): Promise<UserProp> => {
   return DB.update('Users', id, updatedUser);
 }
 
 /**
  * Remove the user by the id
  * @param {String} id - the user id
- * @return {void}
+ * @return {Promise<UserProp>}
  */
 
-const remove = async (id:string) => {
+const remove = async (id:string): Promise<UserProp> => {
   await DB.updateUserIdOfTask(id);
   return DB.remove('Users', id);
 }
