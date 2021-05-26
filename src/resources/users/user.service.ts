@@ -1,12 +1,13 @@
 import * as usersRepo from './user.memory.repository';
+import {UserProp} from "../../common/interfaces";
 
 const getAll = () => usersRepo.getAll();
 
 const getById = (id: string) => usersRepo.getById(id);
 
-const setNew = (newUser: {name: string, login: string, password: string}) => usersRepo.setNew(newUser);
+const setNew = (newUser: UserProp) => usersRepo.setNew(newUser);
 
-const update = (id: string, updatedUser: {name: string, login: string, password: string}) => usersRepo.update(id, updatedUser);
+const update = (id: string, updatedUser: UserProp) => usersRepo.update(id, updatedUser);
 
 const remove = (id: string) => usersRepo.remove(id);
 

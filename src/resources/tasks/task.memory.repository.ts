@@ -1,5 +1,6 @@
 import * as DB from '../../common/Db';
 import {Task} from './task.model';
+import {TaskProp} from "../../common/interfaces";
 
 /**
  * Get all entries of Tasks of the board
@@ -7,7 +8,7 @@ import {Task} from './task.model';
  * @return {Array<Task>} all tasks of the board
  */
 
-const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
+const getAll = async (boardId: string) => DB.getTasksOfBoards(boardId);
 
 /**
  * Get the task by the id
@@ -16,7 +17,7 @@ const getAll = async (boardId) => DB.getTasksOfBoards(boardId);
  * @return {Task} the task by the id
  */
 
-const getById = async (id, boardId) => {
+const getById = async (id: string, boardId: string) => {
   const task = await DB.getById('Tasks', id, boardId);
   if (!task) {
     throw new Error(`The task with id ${id} is not exist.`);
@@ -30,7 +31,7 @@ const getById = async (id, boardId) => {
  * @return {Task} new task
  */
 
-const setNew = async (newTask) => {
+const setNew = async (newTask: TaskProp) => {
   const task = new Task(newTask);
   return DB.create('Tasks', task);
 };
@@ -42,7 +43,7 @@ const setNew = async (newTask) => {
  * @return {Task} updated task
  */
 
-const update = async (id, updatedTask) => DB.update('Tasks', id, updatedTask);
+const update = async (id: string, updatedTask: TaskProp) => DB.update('Tasks', id, updatedTask);
 
 /**
  * Remove the task by the id
@@ -50,7 +51,7 @@ const update = async (id, updatedTask) => DB.update('Tasks', id, updatedTask);
  * @return {void}
  */
 
-const remove = async (id) => DB.remove('Tasks', id);
+const remove = async (id: string) => DB.remove('Tasks', id);
 
 export { getAll, getById, setNew, update, remove };
 

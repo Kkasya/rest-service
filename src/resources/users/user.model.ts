@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import {UserProp} from "../../common/interfaces";
 
 class User {
   id: string;
@@ -17,7 +18,7 @@ class User {
     this.password = password;
   }
 
-  static toResponse(user: {id: string, name: string, login: string}) {
+  static toResponse(user: UserProp) {
     const { id, name, login } = user;
     return { id, name, login };
   }

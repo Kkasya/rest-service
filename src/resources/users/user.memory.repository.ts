@@ -1,5 +1,6 @@
 import * as DB from '../../common/Db';
 import {User} from './user.model';
+import {UserProp} from "../../common/interfaces";
 
 /**
  * Get all entries of Users
@@ -15,7 +16,7 @@ const getAll = async () => DB.getAll('Users');
  */
 
 const getById = async (id: string) => {
-  const user: {id: string, name: string, login: string, password: string} = await DB.getById('Users', id);
+  const user: UserProp = await DB.getById('Users', id);
   if (!user) {
     throw new Error(`The user with id ${id} is not exist.`);
   }
@@ -28,8 +29,8 @@ const getById = async (id: string) => {
  * @return {User} new user
  */
 
-const setNew = async ({name, login, password}: {name: string, login: string, password: string}) => {
-  const user = new User({name, login, password});
+const setNew = async ({name, login, password}: UserProp) => {
+  const user: UserProp = new User({name, login, password});
   return DB.create('Users', user);
 };
 
@@ -40,7 +41,7 @@ const setNew = async ({name, login, password}: {name: string, login: string, pas
  * @return {User} updated user
  */
 
-const update = async (id: string, updatedUser: {name: string, login: string, password: string}) => {
+const update = async (id: string, updatedUser: UserProp) => {
   return DB.update('Users', id, updatedUser);
 }
 

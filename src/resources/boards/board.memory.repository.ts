@@ -1,5 +1,6 @@
 import * as DB from '../../common/Db';
 import {Board} from './board.model';
+import {BoardProp} from "../../common/interfaces";
 
 /**
  * Get all entries of Board
@@ -14,8 +15,8 @@ const getAll = async () => DB.getAll('Boards');
  * @return {Board} the board by the id
  */
 
-const getById = async (id) => {
-  const board = await DB.getById('Boards', id, undefined);
+const getById = async (id:string) => {
+  const board: BoardProp = await DB.getById('Boards', id, undefined);
   if (!board) {
     throw new Error(`The board with id ${id} is not exist.`);
   }
@@ -29,8 +30,8 @@ const getById = async (id) => {
  * @return {Board} new board
  */
 
-const setNew = async ({title, columns}) => {
-  const board = new Board({title, columns});
+const setNew = async ({title, columns}: BoardProp) => {
+  const board: BoardProp = new Board({title, columns});
   return DB.create('Boards', board);
 };
 
@@ -41,7 +42,7 @@ const setNew = async ({title, columns}) => {
  * @return {Board} updated board
  */
 
-const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard);
+const update = async (id: string, updatedBoard: BoardProp) => DB.update('Boards', id, updatedBoard);
 
 /**
  * Remove the board by the id
@@ -49,7 +50,7 @@ const update = async (id, updatedBoard) => DB.update('Boards', id, updatedBoard)
  * @return {void}
  */
 
-const remove = async (id) => {
+const remove = async (id: string) => {
   await DB.removeTasksByBoard(id);
   return DB.remove('Boards', id);
 };

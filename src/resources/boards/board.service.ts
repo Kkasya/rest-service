@@ -1,13 +1,14 @@
-import boardsRepo = require('./board.memory.repository.ts');
+import boardsRepo = require('./board.memory.repository');
+import {BoardProp} from "../../common/interfaces";
 
 const getAll = () => boardsRepo.getAll();
 
-const getById = (id) => boardsRepo.getById(id);
+const getById = (id: string) => boardsRepo.getById(id);
 
-const setNew = (newBoard) => boardsRepo.setNew(newBoard);
+const setNew = (newBoard: BoardProp) => boardsRepo.setNew(newBoard);
 
-const update = (id, updatedBoard) => boardsRepo.update(id, updatedBoard);
+const update = (id: string, updatedBoard: BoardProp) => boardsRepo.update(id, updatedBoard);
 
-const remove = (id) => boardsRepo.remove(id);
+const remove = (id: string) => boardsRepo.remove(id);
 
-module.exports = { getAll, getById, setNew, update, remove };
+export { getAll, getById, setNew, update, remove };

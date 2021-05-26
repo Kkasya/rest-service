@@ -1,6 +1,7 @@
-import routerDefault = require('express')
+import routerDefault = require('express');
 import {User} from './user.model';
 import * as usersService from './user.service';
+import {UserProp} from "../../common/interfaces";
 
 const router = routerDefault.Router();
 
@@ -13,7 +14,7 @@ router.route('/:id').get(async (req, res) => {
   try {
     const {id} = req.params;
     if (id) {
-      const user = await usersService.getById(id);
+      const user: UserProp = await usersService.getById(id);
       res.json(User.toResponse(user));
     }
   } catch (e) {
@@ -22,17 +23,18 @@ router.route('/:id').get(async (req, res) => {
 });
 
 router.route('/').post(async (req, res) => {
-  const newUser = req.body;
-  const user = await usersService.setNew(newUser);
+  const newUser: UserProp = req.body;
+  const user: UserProp = await usersService.setNew(newUser);
+  console.log(await user);
   res.status(201).json(User.toResponse(user));
 });
 
 router.route('/:id').put(async (req, res) => {
   try {
     const {id} = req.params;
-    const updatedUser = req.body;
+    const updatedUser: UserProp = req.body;
     if (id) {
-      const user = await usersService.update(id, updatedUser);
+      const user: UserProp = await usersService.update(id, updatedUser);
       res.json(User.toResponse(user));
     }
   } catch (e) {
@@ -44,7 +46,7 @@ router.route('/:id').delete(async (req, res) => {
   try {
     const {id} = req.params;
     if (id) {
-      const user = await usersService.remove(String(id));
+      const user: UserProp = await usersService.remove(String(id));
       res.status(204).json(User.toResponse(user));
     }
   } catch (e) {
