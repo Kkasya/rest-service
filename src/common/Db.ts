@@ -52,7 +52,7 @@ const DB: DbProp = {
 const getSize = async (table: Table) => DB[table].length;
 
 /**
- * Get all entries of the table
+ * Get all entries of the table table
  * @param {String} table - the name the table in the DB
  * @return {Array<User|Board|Task>} all entries of the table
  */
