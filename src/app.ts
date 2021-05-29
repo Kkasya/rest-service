@@ -1,7 +1,7 @@
-import express  = require('express');
-import swaggerUI  = require('swagger-ui-express');
 import * as path from 'path';
-import YAML  = require('yamljs');
+import express from 'express';
+import swaggerUI from 'swagger-ui-express';
+import YAML from 'yamljs';
 import {router  as userRouter } from './resources/users/user.router';
 import {router  as boardRouter } from './resources/boards/board.router';
 import {router  as taskRouter } from './resources/tasks/task.router';

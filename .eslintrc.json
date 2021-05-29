@@ -9,12 +9,16 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2020,
+    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "impliedStrict": true
     }
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "node": {
+      "tryExtensions": [".js", ".json", ".node", ".ts", ".d.ts"]
+    }
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
@@ -25,7 +29,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:node/recommended",
-    "airbnb-base",
+    "airbnb-typescript/base",
     "prettier"
   ],
   "rules": {

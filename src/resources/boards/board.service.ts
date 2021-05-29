@@ -1,5 +1,5 @@
-import boardsRepo = require('./board.memory.repository');
 import {BoardProp} from "../../common/interfaces";
+import boardsRepo = require('./board.memory.repository');
 
 const getAll = (): Promise<BoardProp[]> => boardsRepo.getAll();
 

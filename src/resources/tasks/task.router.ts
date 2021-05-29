@@ -1,4 +1,4 @@
-import routerDefault = require('express');
+import routerDefault from 'express';
 import * as tasksService from './task.sercive';
 import {TaskProp} from "../../common/interfaces";
 

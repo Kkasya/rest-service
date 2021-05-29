@@ -1,12 +1,18 @@
-let initialId: number = 0;
+let initialId = 0;
 
 class Task {
   id?: string;
+
   title: string;
+
   order: number;
+
   description: string;
+
   userId: string | null;
+
   boardId: string | null;
+
   columnId: string | null;
 
   constructor({
@@ -26,7 +32,7 @@ class Task {
     this.columnId = columnId;
   }
 
-  static getId() {
+  static getId(): string {
     initialId += 1;
     return initialId.toString();
   }

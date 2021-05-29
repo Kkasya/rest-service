@@ -1,11 +1,11 @@
-import routerDefault = require('express');
+import routerDefault from 'express';
 import {User} from './user.model';
 import * as usersService from './user.service';
 import {UserProp} from "../../common/interfaces";
 
 const router = routerDefault.Router();
 
-router.route('/').get(async ({}, res) => {
+router.route('/').get(async (_req, res) => {
   const users = await usersService.getAll();
   res.json(users.map(User.toResponse));
 });
@@ -25,7 +25,6 @@ router.route('/:id').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
   const newUser: UserProp = req.body;
   const user: UserProp = await usersService.setNew(newUser);
-  console.log(await user);
   res.status(201).json(User.toResponse(user));
 });
 

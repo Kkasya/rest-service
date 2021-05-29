@@ -1,10 +1,10 @@
-import routerDefault = require('express');
+import routerDefault from 'express';
 import * as boardService from './board.service';
 import {BoardProp} from "../../common/interfaces";
 
 const router = routerDefault.Router();
 
-router.route('/').get(async ({}, res) => {
+router.route('/').get(async (_req, res) => {
   const boards = await boardService.getAll();
   res.json(boards);
 });

@@ -41,9 +41,7 @@ const setNew = async ({name, login, password}: UserProp): Promise<UserProp> => {
  * @return {Promise<User>} updated user
  */
 
-const update = async (id: string, updatedUser: UserProp): Promise<UserProp> => {
-  return DB.update('Users', id, updatedUser);
-}
+const update = async (id: string, updatedUser: UserProp): Promise<UserProp> => DB.update('Users', id, updatedUser)
 
 /**
  * Remove the user by the id

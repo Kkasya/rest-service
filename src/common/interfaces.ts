@@ -2,7 +2,7 @@ interface UserProp {
   id?: string;
   name: string;
   login: string;
-  password: string;
+  password?: string;
 }
 
 interface BoardProp {
@@ -21,4 +21,10 @@ interface TaskProp {
   columnId?: string | null;
 }
 
-export {UserProp, BoardProp, TaskProp};
+type Table =   'Users'| 'Boards' | 'Tasks';
+
+interface DbProp {
+  [table: string]: any[];
+ }
+
+export {UserProp, BoardProp, TaskProp, DbProp, Table};

@@ -1,18 +1,10 @@
-// import {User} from '../resources/users/user.model';
-// import {Board} from '../resources/boards/board.model';
-import {BoardProp, TaskProp, UserProp} from "./interfaces";
+import {BoardProp, TaskProp, UserProp, DbProp, Table} from "./interfaces";
 
-interface DbProp {
-  [table: string]: any[];  //Array<UserProp> | Array<BoardProp> | Array<TaskProp>;
-}
-const DB: DbProp  = {
+const DB: DbProp = {
   Users: [],
   Boards: [],
   Tasks: []
 };
-
- /// DB['Users'].push(new User(), new User());
- // DB['Boards'].push(new Board());
 
 /**
  * A User
@@ -56,7 +48,8 @@ const DB: DbProp  = {
  * @return {Number} the size of the table
  */
 
-const getSize = async (table: string) => DB[table].length;
+
+const getSize = async (table: Table) => DB[table].length;
 
 /**
  * Get all entries of the table
@@ -64,7 +57,7 @@ const getSize = async (table: string) => DB[table].length;
  * @return {Array<User|Board|Task>} all entries of the table
  */
 
-const getAll = async (table: string) => JSON.parse(JSON.stringify(DB[table]));
+const getAll = async (table: Table) => JSON.parse(JSON.stringify(DB[table]));
 
 /**
  * Get the entry of the table by the id
@@ -74,7 +67,7 @@ const getAll = async (table: string) => JSON.parse(JSON.stringify(DB[table]));
  * @return {User|Board|Task} the entry of the table
  */
 
-const getById = async (table: string, id: string, boardId?: string) => {
+const getById = async (table: Table, id: string, boardId?: string) => {
   const data = boardId ?
     DB[table].filter((item: TaskProp) => item.boardId === boardId) :
     DB[table];
@@ -88,7 +81,7 @@ const getById = async (table: string, id: string, boardId?: string) => {
  * @return {User|Board|Task} the entry of the table
  */
 
-const create = async (table: string, item: UserProp|BoardProp|TaskProp) => {
+const create = async (table: Table, item: UserProp|BoardProp|TaskProp) => {
   const length: number = DB[table].push(item);
   return DB[table][length - 1];
 };
@@ -101,7 +94,7 @@ const create = async (table: string, item: UserProp|BoardProp|TaskProp) => {
  * @return {User|Board|Task} the entry of the table
  */
 
-const update = async (table: string, id: string, updatedItem: UserProp|BoardProp|TaskProp) => {
+const update = async (table: Table, id: string, updatedItem: UserProp|BoardProp|TaskProp) => {
   const index = await DB[table].findIndex((item: UserProp|BoardProp|TaskProp) => item.id === id);
   if (index === -1) {
     throw new Error(`The entity with id ${id} is not exist.`);
@@ -119,9 +112,7 @@ const update = async (table: string, id: string, updatedItem: UserProp|BoardProp
  * @return {Array<User|Board|Task>} all tasks of the board
  */
 
-const getTasksOfBoards = async (boardId: string) => {
-  return DB['Tasks'].filter((task: TaskProp) => task.boardId === boardId);
-}
+const getTasksOfBoards = async (boardId: string) => DB['Tasks'].filter((task: TaskProp) => task.boardId === boardId)
 
 /**
  * Remove all tasks of the board
@@ -160,12 +151,12 @@ const updateUserIdOfTask = async (userId: string) => {
  * @return {Array<User|Board|Task>} removed item of the table
  */
 
-const remove = async (table: string, id: string) => {
+const remove = async (table: Table, id: string) => {
   const index = await DB[table].findIndex((item: UserProp|BoardProp|TaskProp) => item.id === id);
   if (index === -1) {
     throw new Error(`The entity with id ${id} is not exist.`);
   }
-  if (table === 'Board') await removeTasksByBoard(id);
+  if (table === 'Boards') await removeTasksByBoard(id);
   return DB[table].splice(index, 1)[0];
 };
 

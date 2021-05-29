@@ -3,8 +3,11 @@ import {UserProp} from "../../common/interfaces";
 
 class User {
   id: string;
+
   name: string;
+
   login: string;
+
   password: string;
 
   constructor({
@@ -18,7 +21,7 @@ class User {
     this.password = password;
   }
 
-  static toResponse(user: UserProp) {
+  static toResponse(user: UserProp): UserProp {
     const { id, name, login } = user;
     return { id, name, login };
   }

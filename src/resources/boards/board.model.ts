@@ -1,8 +1,10 @@
-let initialId: number = 0;
+let initialId = 0;
 
 class Board {
   id: string;
+
   title: string;
+
   columns: Array<{ order: number, title: string }>;
 
   constructor({
@@ -19,7 +21,7 @@ class Board {
     this.columns = [...columns];
   }
 
-  static getId() {
+  static getId(): string {
     initialId += 1;
     return initialId.toString();
   }
