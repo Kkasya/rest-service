@@ -23,8 +23,11 @@ interface TaskProp {
 
 type Table =   'Users'| 'Boards' | 'Tasks';
 
+type EntriesProp = UserProp | BoardProp | TaskProp;
+
 interface DbProp {
-  [table: string]: any[];
+  [table: string]: Array<any>;
  }
 
-export {UserProp, BoardProp, TaskProp, DbProp, Table};
+
+export {UserProp, BoardProp, TaskProp, DbProp, Table, EntriesProp};

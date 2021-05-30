@@ -18,7 +18,7 @@ const getAll = async (boardId: string): Promise<TaskProp[]> => DB.getTasksOfBoar
  */
 
 const getById = async (id: string, boardId: string): Promise<TaskProp> => {
-  const task = await DB.getById('Tasks', id, boardId);
+  const task: TaskProp = await DB.getById('Tasks', id, boardId);
   if (!task) {
     throw new Error(`The task with id ${id} is not exist.`);
   }
