@@ -1,5 +1,6 @@
 const winston = require('winston');
 import expressWinston from 'express-winston';
+const {BAD_REQUEST, getStatusText} = require('http-status-codes');
 
 const logger = expressWinston.logger({
   transports: [new winston.transports.File({ filename: './log/info.log', level: 'info' })],
@@ -9,12 +10,10 @@ const logger = expressWinston.logger({
   ignoreRoute: function (_req:any, _res:any) { return false; }
 });
 
-const handleError = (err: any, res: any) => {
-  const { statusCode, message } = err;
-  res.status(statusCode).json({
-    status: "error",
-    statusCode,
-    message
-  });
-};
-export {logger, handleError};
+
+class ValidationError extends Error {
+  status = BAD_REQUEST;
+  text = getStatusText(this.status);
+}
+
+export {logger, ValidationError};

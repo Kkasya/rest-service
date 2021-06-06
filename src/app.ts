@@ -6,16 +6,13 @@ import {router  as userRouter } from './resources/users/user.router';
 import {router  as boardRouter } from './resources/boards/board.router';
 import {router  as taskRouter } from './resources/tasks/task.router';
 import expressWinston from "express-winston";
-import {logger, handleError} from "./logger";
+import {logger} from "./logger";
 import fs from 'fs';
-const {INTERNAL_SERVER_ERROR, BAD_REQUEST, getStatusText} = require('http-status-codes');
+import {ValidationError} from "./logger";
+
+const {INTERNAL_SERVER_ERROR, getStatusText} = require('http-status-codes');
 
 
-class ValidationError extends Error {
-  status = BAD_REQUEST;
-  text = getStatusText(this.status);
-
-}
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -41,9 +38,6 @@ app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', taskRouter);
 
 
-app.use((err:any, _req:any, res:any, _next:any) => {
-  handleError(err, res);
-});
 
 app.use((req:any, res:any, _next:any) => {
   console.log(res.statusCode );
@@ -69,8 +63,8 @@ app.use((err:any, _req:any, res:any, next:any) => {
   next(err);
 });
 
-app.use((err:any, _req:any, res:any, _next:any) => {
-  fs.appendFileSync('./log/error.log', `\nError: ${err.status} ${err.text}`);
+app.use((_err:any, _req:any, res:any, _next:any) => {
+  fs.appendFileSync('./log/error.log', `\n ${getStatusText(INTERNAL_SERVER_ERROR)} ${INTERNAL_SERVER_ERROR}` );
   console.log(`\nError: ${INTERNAL_SERVER_ERROR} ${getStatusText(INTERNAL_SERVER_ERROR)}` );
   res.status(INTERNAL_SERVER_ERROR).send(getStatusText(INTERNAL_SERVER_ERROR));
 });

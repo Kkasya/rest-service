@@ -3,3 +3,6 @@ captured error: listen EADDRINUSE: address already in use :::4000
 Vadidation error: 400 Bad Request
 Vadidation error: undefined undefined
 Vadidation error: undefined undefined
+Error: undefined undefined
+Error: 500 Internal Server Error
+ Internal Server Error 500
