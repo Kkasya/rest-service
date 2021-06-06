@@ -39,21 +39,16 @@ app.use('/boards/:boardId/tasks', taskRouter);
 
 
 
-app.use((req:any, res:any, _next:any) => {
-  console.log(res.statusCode );
-  if (!req.query.param || req.query.param !== 'value'){
-    //if(res.statusCode === 400) {
-
+app.use((req:any, _res:any, _next:any) => {
+  if (!req.query.param){
     throw new ValidationError();
-
   }
-
   throw new Error();
-
 });
 
 app.use((err:any, _req:any, res:any, next:any) => {
   //if ()
+  console.log('---------')
   if (err instanceof ValidationError) {
     res.status(err.status).send(err.text);
     fs.appendFileSync('./log/error.log', `\nVadidation error: ${err.status} ${err.text}`);
