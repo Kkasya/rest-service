@@ -1,10 +1,17 @@
 
-captured error: listen EADDRINUSE: address already in use :::4000
 Vadidation error: 400 Bad Request
-Vadidation error: undefined undefined
-Vadidation error: undefined undefined
-Error: undefined undefined
-Error: 500 Internal Server Error
+Vadidation error: 400 Bad Request
  Internal Server Error 500
+Exception error: uncaughtException
+Unhandled rejection detected: unhandledRejection
+ Internal Server Error 500
+ Internal Server Error 500
+Vadidation error: 400 Bad Request
+Unhandled rejection detected: unhandledRejection
+Exception error: uncaughtException
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
 Vadidation error: 400 Bad Request
 Vadidation error: 400 Bad Request
