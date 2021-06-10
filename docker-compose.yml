@@ -6,12 +6,13 @@ services:
       - ${PORT}:${PORT}
     depends_on:
         - postgres
+    volumes:
+    - ./log:/usr/app/log
+    - ./src:/usr/app/src
     environment:
         - PORT=${PORT}
   postgres:
       build: ./db/
-      volumes:
-      - ./pg_data:/var/lib/postgresql/data/pgdata
       environment:
           POSTGRES_PORT: ${POSTGRES_PORT}
           POSTGRES_USER: ${POSTGRES_USER}

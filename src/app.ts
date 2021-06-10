@@ -53,6 +53,6 @@ process.on('uncaughtException', (err:Error) => {
 process.on('unhandledRejection', (reason: Error) => {
   ErrorHandling(`Unhandled rejection detected: ${reason.message}`);
 });
-console.log('hi!');
+console.log('hi');
 
 export {app};
