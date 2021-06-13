@@ -2,6 +2,7 @@ version: '3'
 services:
   node:
     build: .
+    restart: on-failure
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -15,6 +16,7 @@ services:
       - net
   postgres:
       build: ./db/
+      restart: on-failure
       environment:
           POSTGRES_PORT: ${POSTGRES_PORT}
           POSTGRES_USER: ${POSTGRES_USER}
@@ -25,3 +27,5 @@ services:
 networks:
   net:
     driver: bridge
+
+
