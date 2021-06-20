@@ -24,11 +24,12 @@ app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', taskRouter);
 
-app.use((req:Request) => {
-  if (!req.query["param"] ){
-    throw new ValidationError();
+app.use('/', (req:Request, res:Response, next:NextFunction) => {
+  if (req.originalUrl === '/'){
+    res.send('Service is running!');
+    return;
   }
-  throw new Error();
+  next();
 });
 
 app.use((err:Error, _req:Request, res:Response, next:NextFunction) => {
@@ -52,5 +53,8 @@ process.on('uncaughtException', (err:Error) => {
 process.on('unhandledRejection', (reason: Error) => {
   ErrorHandling(`Unhandled rejection detected: ${reason.message}`);
 });
+console.log('hi');
+
+//throw Error('oops');
 
 export {app};

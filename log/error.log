@@ -20,3 +20,22 @@ Unhandled rejection detected: Oops!
 Vadidation error: 400 Bad Request
 
 Vadidation error: 400 Bad Request
+Exception error: The argument 'options' must have the property "port" or "path". Received {
+  npm_package_dependencies_express_winston: '^4.1.0',
+  npm_package_dependencies_ts_loader: '^9.2.2',
+  npm_package_devDepende...
+Exception error: The argument 'options' must have the property "port" or "path". Received {
+  npm_package_dependencies_express_winston: '^4.1.0',
+  npm_package_dependencies_ts_loader: '^9.2.2',
+  npm_package_devDepende...
+Exception error: The argument 'options' must have the property "port" or "path". Received {
+  npm_package_dependencies_express_winston: '^4.1.0',
+  npm_package_dependencies_ts_loader: '^9.2.2',
+  npm_package_devDepende...
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
