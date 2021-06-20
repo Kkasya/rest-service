@@ -1,0 +1,41 @@
+
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+ Internal Server Error 500
+Exception error: uncaughtException
+Unhandled rejection detected: unhandledRejection
+ Internal Server Error 500
+ Internal Server Error 500
+Vadidation error: 400 Bad Request
+Unhandled rejection detected: unhandledRejection
+Exception error: uncaughtException
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Vadidation error: 400 Bad Request
+Exception error: Oops!
+Unhandled rejection detected: Oops!
+Vadidation error: 400 Bad Request
+
+Vadidation error: 400 Bad Request
+Exception error: The argument 'options' must have the property "port" or "path". Received {
+  npm_package_dependencies_express_winston: '^4.1.0',
+  npm_package_dependencies_ts_loader: '^9.2.2',
+  npm_package_devDepende...
+Exception error: The argument 'options' must have the property "port" or "path". Received {
+  npm_package_dependencies_express_winston: '^4.1.0',
+  npm_package_dependencies_ts_loader: '^9.2.2',
+  npm_package_devDepende...
+Exception error: The argument 'options' must have the property "port" or "path". Received {
+  npm_package_dependencies_express_winston: '^4.1.0',
+  npm_package_dependencies_ts_loader: '^9.2.2',
+  npm_package_devDepende...
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
+Exception error: oops
